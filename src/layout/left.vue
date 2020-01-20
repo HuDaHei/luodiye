@@ -59,7 +59,6 @@ export default {
   methods: {
     ...mapActions("luodiye", ["handlerAddWidget"]),
     handlerClickIcon(item) {
-      console.log(item, "kkk");
       this.handlerAddWidget(item);
     }
   }

@@ -18,9 +18,7 @@
     <draggable
       v-model="widgets"
       class="container"
-      :options="{
-        ghostClass: 'blue-background-class'
-      }"
+      ghostClass='blue-background-class'
     >
       <transition-group>
         <template v-for="(item, index) of widgets">
