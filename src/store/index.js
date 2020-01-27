@@ -9,6 +9,13 @@ export default new Vuex.Store({
   getters: {
     widget(state) {
       return state.luodiye.widgets;
+    },
+    activeWidget(state) {
+      const id = state.luodiye.activeWidgetID;
+      return state.luodiye.widgets.find( item => item.id == id)
+    },
+    activeWidgetID(state) {
+      return state.luodiye.activeWidgetID
     }
   },
   modules: {

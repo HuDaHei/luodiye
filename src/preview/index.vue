@@ -3,9 +3,23 @@
   .container {
     height: 100vh;
   }
-}
-.item {
-  // background-color: red;
+  .container-component {
+    position: relative;
+    min-height: 42px;
+    background-color: aquamarine;
+    .mark {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .component {
+      // position: relative;
+      // z-index: -1;
+    }
+  }
+  .box-border {
+    border: 1px solid red;
+  }
 }
 .blue-background-class {
   border: 1px dotted yellow;
@@ -13,7 +27,7 @@
 }
 </style>
 <template>
-  <div class="luodiye-preview">
+  <div class="luodiye-preview" @click="handlerClickCom($event)">
     <!-- 固定的组件 -->
     <draggable
       v-model="widgets"
@@ -22,7 +36,11 @@
     >
       <transition-group>
         <template v-for="(item, index) of widgets">
-          <component :is="item.name" :key="index"></component>
+          <div class="container-component" :class="[item.id === activeWidgetID ? 'box-border':'']" :key="index">
+            <!-- 遮罩层 -->
+            <div class="mark" :data-id="item.id"></div> 
+            <component :is="item.name" :widget="item"></component>
+          </div>
         </template>
       </transition-group>
     </draggable>
@@ -38,7 +56,8 @@ export default {
   },
   data() {
     return {
-      widgets: []
+      widgets: [],
+      activeWidgetID: ""
     };
   },
   mounted() {
@@ -49,6 +68,7 @@ export default {
     this.receiver();
   },
   methods: {
+    //接受外部传递进来的数据
     receiver() {
       window.addEventListener("message", e => {
         const { data } = e;
@@ -57,6 +77,16 @@ export default {
           this.widgets = widgets;
         }
       });
+    },
+    //向外发送数据
+    send(id) {
+      window.parent.postMessage({type: 'iframe',id})
+    },
+    //组件被点击
+    handlerClickCom(e) {
+      const activeWidgetID = e.target.getAttribute('data-id');
+      this.activeWidgetID = activeWidgetID;
+      this.send(activeWidgetID);
     }
   }
 };

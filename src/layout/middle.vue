@@ -1,12 +1,12 @@
 <style lang="scss" scoped>
 .luodiye-middle {
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
 }
 </style>
 <template>
   <div class="luodiye-middle">
     <iframe
-      src="http://localhost:8081/#/preview"
+      src="http://localhost:8080/#/preview"
       frameborder="0"
       ref="iframe"
       width="100%"
@@ -15,12 +15,12 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions} from "vuex";
 
 export default {
   name: "luodiyeMiddle",
   computed: {
-    ...mapGetters(["widget"])
+    ...mapGetters(["widget", "activeWidget"])
   },
   watch: {
     widget: {
@@ -31,13 +31,27 @@ export default {
       deep: true
     }
   },
+  mounted() {
+    this.receiver();
+  },
   methods: {
+    ...mapActions('luodiye',['handlerUpdateActiveWidget']),
     postmessage(widgets) {
       const iframeWindow = this.$refs.iframe.contentWindow;
       iframeWindow.postMessage(
         { type: "preview", widgets },
-        "http://localhost:8081"
+        "http://localhost:8080"
       );
+    },
+    //接受数据
+    receiver() {
+      window.addEventListener('message', e => {
+        const { type, id } = e.data;
+        if(type == 'iframe' ) {
+          console.log(id,'ddd')
+          this.handlerUpdateActiveWidget(id)
+        }
+      })
     }
   }
 };

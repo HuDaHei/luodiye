@@ -26,9 +26,14 @@ export default {
 ul {
   list-style: none;
 }
+h1,h2{
+  margin: 0;
+  padding: 0;
+}
 * {
   margin: 0;
   padding: 0;
   font-size: 12px;
+  box-sizing: border-box;
 }
 </style>

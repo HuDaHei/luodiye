@@ -1,5 +1,18 @@
 <template>
   <div>
-    我是右边
+    <component :is="componentName"></component>
   </div>
 </template>
+<script>
+export default {
+  name: 'luodiyeEdit',
+  components: {
+    'edit-title-content': () => import('./right/title/content')
+  },
+  data() {
+    return {
+      componentName: ''
+    }
+  }
+}
+</script>

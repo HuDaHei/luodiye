@@ -8,7 +8,10 @@ class Title extends Widget {
 }
 const titleConfig = {
   style: {},
-  fields: {},
+  fields: {
+    headline: '主标题',
+    subheading: '副标题'
+  },
   icon: "icon-title",
   alias: "标题",
   name: "ye-title"

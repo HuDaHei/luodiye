@@ -1,4 +1,3 @@
-import uuid from "uuid";
 export default class Widget {
   // style 组件样式控制
   // name 组件名称 必须
@@ -19,7 +18,7 @@ export default class Widget {
     this.name = name;
     this.type = type;
     this.alias = alias;
-    this.id = id || uuid();
+    this.id = id;
     this.errors = {};
   }
 }

@@ -27,6 +27,7 @@ $iconColor: #36af89;
   </div>
 </template>
 <script>
+import uuid from "uuid";
 import { mapActions } from "vuex";
 const context = require.context("@/widgets", true, /\.js$/);
 const list = [];
@@ -59,7 +60,9 @@ export default {
   methods: {
     ...mapActions("luodiye", ["handlerAddWidget"]),
     handlerClickIcon(item) {
-      this.handlerAddWidget(item);
+      const id = uuid();
+      const widget = Object.assign({}, item, {id});
+      this.handlerAddWidget(widget);
     }
   }
 };
