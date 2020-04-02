@@ -15,11 +15,11 @@ export default {
   computed: {
     //标题
     headline() {
-      return this.widget.fields.headline
+      return this.widget.fields.headline || '标题'
     },
     //副标题
     subheading(){
-      return this.widget.fields.subheading
+      return this.widget.fields.subheading || '副标题'
     }
   }
 }

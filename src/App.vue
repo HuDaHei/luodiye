@@ -33,7 +33,7 @@ h1,h2{
 * {
   margin: 0;
   padding: 0;
-  font-size: 12px;
+  font-size: 14px;
   box-sizing: border-box;
 }
 </style>
