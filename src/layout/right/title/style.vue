@@ -9,13 +9,13 @@
         <div>
           <template v-for="([attr,config], loIndex) in localStyle[key]">
             <component
-              :is="'ye-input-range'"
-              :property="key+'-'+attr"
+              :is="config.config.control"
+              :property="key+'&'+attr"
               :config="config"
               :value="config.value"
               :key="loIndex"
-              @input="handlerClick"
-            ></component>
+              @input="handlerClick">
+            </component>
           </template>
         </div>
       </div>
@@ -32,14 +32,9 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-    //   localStyle: null,
-      type: "x"
-    };
-  },
   components: {
-    "ye-input-range": () => import("./../components/ye-input-range")
+    "ye-input-range": () => import("./../components/ye-input-range"),
+    "ye-multiple-checkbox": () => import("./../components/ye-multiple-checkbox")
   },
   computed: {
     alias() {
@@ -62,7 +57,7 @@ export default {
     ...mapActions("luodiye", ["handlerUpdateStyle"]),
     handlerClick(e) {
       const property = e.target.getAttribute("property");
-      const [outkey, innerkey] = property.split("-");
+      const [outkey, innerkey] = property.split("&");
       const payload = {
         id: this.widget.id,
         value: e.target.value,

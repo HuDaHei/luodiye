@@ -6,7 +6,7 @@
 <template>
   <div class="luodiye-middle">
     <iframe
-      src="http://localhost:8081/#/preview"
+      src="http://localhost:8080/#/preview"
       frameborder="0"
       ref="iframe"
       width="320px"
@@ -41,7 +41,7 @@ export default {
       const iframeWindow = this.$refs.iframe.contentWindow;
       iframeWindow.postMessage(
         { type: "preview", widgets },
-        "http://localhost:8081"
+        "http://localhost:8080"
       );
     },
     //接受数据

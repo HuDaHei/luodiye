@@ -8,17 +8,35 @@ class Title extends Widget {
 }
 const titleConfig = {
   style: {
-    widgetGlobal: {},
-    headline: {
-      height: {
-        value: 13,
+    widgetGlobal: {
+      'font-size': {
+        value: 14,
         config: {
-          name: '高度',
-          range: [10,50]
+          control: 'ye-input-range', // 控制组件
+          name: '字体大小',
+          range: [10,50],
+          unit: 'px' // 单位
         }
       }
     },
-    subheading: {},
+    headline: {
+      'text-align': {
+        value: 'left',
+        config: {
+          control: 'ye-multiple-checkbox', // 控制组件
+          checkboxList: [{value:'left',name:'左边'},{value:'center',name:'中间'},{value:'right',name: '右边'}]
+        }
+      }
+    },
+    subheading: {
+      'text-align': {
+        value: 'left',
+        config: {
+          control: 'ye-multiple-checkbox', // 控制组件
+          checkboxList: [{value:'left',name:'左边'},{value:'center',name:'中间'},{value:'right',name: '右边'}]
+        }
+      }
+    },
     alias: {
       widgetGlobal: '全局',
       headline: '标题',
